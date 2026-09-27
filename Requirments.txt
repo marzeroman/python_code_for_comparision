@@ -1,0 +1,6 @@
+pandas>=2.0
+openpyxl
+rapidfuzz
+streamlit>=1.30
+xlrd
+pyarrow
