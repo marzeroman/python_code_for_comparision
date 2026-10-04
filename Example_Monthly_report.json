@@ -1,0 +1,145 @@
+{
+  "_about": [
+    "Profile for report_tool.py. Run:  python report_tool.py --profile example_monthly_report",
+    "'report_tool' = settings from report_tool.py; 'compare_tool' = settings from compare_tool.py.",
+    "Same names and meaning as the 👉 comments in those files. Edit values here as needed.",
+    "TASK / TABLE_A / TABLE_B / OUTPUT_FILE / USE_DEMO_DATA are always taken from 'report_tool'."
+  ],
+  "report_tool": {
+    "USE_DEMO_DATA": true,
+    "TASK": "report",
+    "TABLE_A": {
+      "file": "data/sales.xlsx",
+      "sheet": null
+    },
+    "TABLE_B": {
+      "file": "",
+      "sheet": null
+    },
+    "DATE_COLUMN": "Invoice Date",
+    "PERIOD": "month",
+    "VALUE_COLUMNS": [
+      "Amount"
+    ],
+    "CALC": "sum",
+    "CATEGORY_COLUMN": "Category",
+    "TOP_N": 8,
+    "PIVOT_ROWS": [
+      "Period"
+    ],
+    "PIVOT_COLUMNS": [
+      "City"
+    ],
+    "PIVOT_VALUES": [
+      "Amount"
+    ],
+    "PIVOT_CALC": "sum",
+    "PIVOT_TOTALS": true,
+    "PIVOT_CHART": "line",
+    "FORMULA_CHECKS": [
+      {
+        "name": "Amount = Unit Price x Quantity",
+        "check": "[Amount]",
+        "equals": "[Unit Price] * [Quantity]",
+        "tolerance": 0.01
+      }
+    ],
+    "SHOW_COLUMNS": [
+      "Invoice No",
+      "Supplier Name"
+    ],
+    "USE_CLEANING": true,
+    "INCLUDE_DATA_SHEET": true,
+    "OUTPUT_FILE": "results/{profile}_report_{date}.xlsx",
+    "LOG_FOLDER": "logs",
+    "PROFILES_FOLDER": "profiles"
+  },
+  "compare_tool": {
+    "KEY_A": [
+      "Supplier Name"
+    ],
+    "KEY_B": [
+      "Vendor"
+    ],
+    "COMPARE_COLUMNS": {
+      "Amount": "Total",
+      "City": "City"
+    },
+    "SIMILARITY_THRESHOLD": 85,
+    "REVIEW_BELOW": 95,
+    "MATCH_METHOD": "token_sort",
+    "IGNORE_WORDS": [
+      "co",
+      "company",
+      "ltd",
+      "llc",
+      "inc",
+      "the"
+    ],
+    "MUST_MATCH_EXACTLY": {},
+    "NUMBER_TOLERANCE": 0.0,
+    "IGNORE_CASE": true,
+    "PIVOT_ROWS": [
+      "City"
+    ],
+    "PIVOT_COLUMNS": [
+      "Category"
+    ],
+    "PIVOT_VALUES": [
+      "Amount"
+    ],
+    "PIVOT_CALC": "sum",
+    "PIVOT_TOTALS": true,
+    "COLUMN_A": "Supplier Name",
+    "COLUMN_B": "Vendor",
+    "COMPARE_BY_POSITION": false,
+    "ROW_A": {
+      "find_by": "Supplier Name",
+      "value": "Apex Cement Factory"
+    },
+    "ROW_B": {
+      "find_by": "Vendor",
+      "value": "Apex Cement Fctory"
+    },
+    "APPLY_CLEANING": true,
+    "EMPTY_MARKERS": [
+      "",
+      "-",
+      "--",
+      "n/a",
+      "na",
+      "null",
+      "none",
+      "nil",
+      "#n/a",
+      "?",
+      "nan"
+    ],
+    "TRIM_SPACES": true,
+    "UNIFY_SPELLING_VARIANTS": true,
+    "TO_NUMBER": "auto",
+    "DECIMAL_SEPARATOR": ".",
+    "TO_DATE": "auto",
+    "DAY_FIRST": true,
+    "FIX_CASE": {},
+    "REPLACE_VALUES": {},
+    "REMOVE_DUPLICATE_ROWS": true,
+    "MERGE_DUPLICATE_KEYS": {},
+    "INCLUDE_TABLE_B": true,
+    "CLEANED_FOLDER": "results/cleaned",
+    "RULES": [
+      {
+        "column": "Amount",
+        "min": 0
+      },
+      {
+        "column": "Invoice Date",
+        "not_future": true
+      },
+      {
+        "column": "Supplier Name",
+        "required": true
+      }
+    ]
+  }
+}
